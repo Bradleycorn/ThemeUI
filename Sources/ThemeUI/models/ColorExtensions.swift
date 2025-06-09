@@ -1,4 +1,3 @@
-#if os(iOS)
 import Foundation
 import UIKit
 import SwiftUI
@@ -23,6 +22,9 @@ extension Color {
         r = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
         g = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
         b = CGFloat(hexNumber & 0x000000ff) / 255
+        
+        let color: UIColor
+        
         
         self.init(uiColor: UIColor(red: r, green: g, blue: b, alpha: a))
     }
@@ -112,4 +114,3 @@ extension Color {
         return Color.contrastRatio(between: self, and: color)
     }
 }
-#endif

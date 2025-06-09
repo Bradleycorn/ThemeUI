@@ -3,6 +3,7 @@
 
 import PackageDescription
 
+#if os(iOS)
 let package = Package(
     name: "ThemeUI",
     platforms: [ .iOS(.v15), .macOS(.v13)],
@@ -20,3 +21,4 @@ let package = Package(
         ),
     ]
 )
+#endif
