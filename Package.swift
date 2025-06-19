@@ -3,10 +3,9 @@
 
 import PackageDescription
 
-#if os(iOS)
 let package = Package(
     name: "ThemeUI",
-    platforms: [ .iOS(.v15), .macOS(.v13)],
+    platforms: [ .iOS(.v16), .macOS(.v10_15) ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -21,4 +20,3 @@ let package = Package(
         ),
     ]
 )
-#endif

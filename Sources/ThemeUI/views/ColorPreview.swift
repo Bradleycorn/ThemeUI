@@ -1,4 +1,3 @@
-#if os(iOS)
 import Foundation
 import SwiftUI
 
@@ -20,7 +19,7 @@ public struct ColorPreview: View {
     /// A calculated property to determine the color to use
     /// when rendering the name on top of the color swatch.
     var textColor: Color {
-        (color.luminance() < 0.5) ? .white : .black
+        color.contrastColor
     }
 
     /// Create a color preview with a specific width and height.
@@ -54,9 +53,9 @@ public struct ColorPreview: View {
             Text(name)
                 .foregroundStyle(textColor.opacity(0.8))
                 .font(.system(size: 12))
-                .padding(4)
+                .multilineTextAlignment(.leading)
+                .lineLimit(2)
+                .padding(8)
         }.frame(width: width, height: height, alignment: .center)
     }
 }
-
-#endif

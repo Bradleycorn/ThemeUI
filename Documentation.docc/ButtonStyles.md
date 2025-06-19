@@ -25,7 +25,7 @@ Button("Click Me", action: { print("button clicked!") })
 ## Customizing Buttons
 
 By default, Buttons are rendered using a set of ``ButtonColors`` based on your theme's
-``Colors/primary`` color, and using a consistent `Shape` (defined in ``ButtonDefaults``). 
+``ColorScheme/primary`` color, and using a consistent `Shape` (defined in ``ButtonDefaults``). 
 
 You can customize styles by passing in a different set of ``ButtonColors`` and/or `Shape` to the
 initializer for the Style you are applying:

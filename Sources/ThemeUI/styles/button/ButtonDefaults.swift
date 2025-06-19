@@ -1,4 +1,3 @@
-#if os(iOS)
 import Foundation
 import SwiftUI
 
@@ -25,9 +24,9 @@ public class ButtonDefaults {
     /// this property provides a set of colors from your ``AppTheme/colorScheme`` to use by default.
     ///
     /// - Parameters:
-    ///   - colorScheme: The current set of ``Colors`` applyed by your ``AppTheme``.
+    ///   - colorScheme: The current ``ColorScheme`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to buttons.
-    public static func colors(from colorScheme: Colors) -> ButtonColors {
+    public static func colors(from colorScheme: ColorScheme) -> ButtonColors {
         return colorScheme.deaultButtonColors
     }
     
@@ -38,9 +37,9 @@ public class ButtonDefaults {
     /// for the button's text content and border.
     ///
     /// - Parameters:
-    ///   - colorScheme: The current set of ``Colors`` applyed by your ``AppTheme``.
+    ///   - colorScheme: The current ``ColorScheme`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to an Outlined button's text and border.
-    public static func outlinedColors(from colorScheme: Colors) -> ButtonColors {
+    public static func outlinedColors(from colorScheme: ColorScheme) -> ButtonColors {
         return colorScheme.outlinedButtonColors
     }
 
@@ -52,9 +51,9 @@ public class ButtonDefaults {
     /// for the button's text content.
     ///
     /// - Parameters:
-    ///   - colorScheme: The current set of ``Colors`` applyed by your ``AppTheme``.
+    ///   - colorScheme: The current ``ColorScheme`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to an Text button's text.
-    public static func textColors(from colorScheme: Colors) -> ButtonColors {
+    public static func textColors(from colorScheme: ColorScheme) -> ButtonColors {
         return colorScheme.textButtonColors
     }
 
@@ -64,4 +63,3 @@ public class ButtonDefaults {
     /// A sdefault hape to apply to ``FilledButtonStyle`` and ``OutlinedButtonStyle`` buttons.
     public static let shape: some Shape = .capsule
 }
-#endif

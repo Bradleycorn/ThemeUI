@@ -3,24 +3,24 @@ Customizing your Theme's color pallete.
 
 ## Overview
 ThemeUI provides an extensive palette of semantically named colors via the
-``Colors`` class. It also provides helper methods to create a set of colors
+``ColorScheme`` class. It also provides helper methods to create a set of colors
 starting from a sane set of defaults, allowing you to customize as much or as little
 of the palette as you like.
 
 ## Creating a Color Palette
-You can create an instance of `Colors` directly by calling it's initializer and passing in color values for each of the semantically named colors. 
+You can create an instance of `ColorScheme` directly by calling it's initializer and passing in color values for each of the semantically named colors. 
 
 For convenience, ThemeUI also includes a set of sane default colors (based on the default "ios Blue" accent color)
-and exposes two top level functions to create a set of `Colors` using the defaults, while allowing you to pass in only
+and exposes two top level functions to create a `ColorScheme` using the defaults, while allowing you to pass in only
 the colors you want to override for your brand. 
 
  - ``lightColorScheme(primary:onPrimary:primaryContainer:onPrimaryContainer:secondary:onSecondary:secondaryContainer:onSecondaryContainer:tertiary:onTertiary:tertiaryContainer:onTertiaryContainer:surface:surfaceDim:surfaceBright:surfaceContainer:onSurface:inverseSurface:inverseOnSurface:inversePrimary:error:onError:errorContainer:onErrorContainer:outline:outlineVariant:scrim:)`` 
 
-    This function to creates a set of `Colors` for an app using default values that are suitable for a device in light mode. 
+    This function to creates a `ColorScheme` for an app using default values that are suitable for a device in light mode. 
 
 - ``darkColorScheme(primary:onPrimary:primaryContainer:onPrimaryContainer:secondary:onSecondary:secondaryContainer:onSecondaryContainer:tertiary:onTertiary:tertiaryContainer:onTertiaryContainer:surface:surfaceDim:surfaceBright:surfaceContainer:onSurface:inverseSurface:inverseOnSurface:inversePrimary:error:onError:errorContainer:onErrorContainer:outline:outlineVariant:scrim:)``
 
-  This function to creates a set of `Colors` for an app using default values that are suitable for a device in dark mode. 
+  This function to creates a `ColorScheme` for an app using default values that are suitable for a device in dark mode. 
 
 
 All agruments for both of these methods are optional. You can call them

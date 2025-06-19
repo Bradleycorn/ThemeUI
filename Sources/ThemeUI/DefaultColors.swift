@@ -1,5 +1,3 @@
-#if os(iOS)
-
 import Foundation
 import SwiftUI
 
@@ -130,5 +128,3 @@ public let default_dark_scrim = Color(0xFF000000)
         .background(.black)
     }
 }
-
-#endif

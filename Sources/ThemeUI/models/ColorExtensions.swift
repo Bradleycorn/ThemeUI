@@ -1,6 +1,6 @@
 import Foundation
-import UIKit
 import SwiftUI
+
 
 extension Color {
     
@@ -22,9 +22,6 @@ extension Color {
         r = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
         g = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
         b = CGFloat(hexNumber & 0x000000ff) / 255
-        
-        let color: UIColor
-        
         
         self.init(uiColor: UIColor(red: r, green: g, blue: b, alpha: a))
     }
@@ -50,6 +47,20 @@ extension Color {
         self.init(red: r, green: g, blue: b)
     }
     
+    /// Calculates a contrasting color (black or white) for the given color.
+    /// This method uses the luminance of the color to determine if black or white.
+    ///
+    /// - Parameter color: The `Color` to calculate a contrasting color for.
+    /// - Returns: A `Color` that contrasts with the given color, either black or white.
+    var contrastColor: Color {
+        let luminanceThreshold = 0.175
+        if (self.luminance() > luminanceThreshold) {
+            return Color.black
+        } else {
+            return Color.white
+        }
+    }
+        
     /// Calcuates the "luminance" of this `Color` instance.
     /// Luminance measure how dark or light a color is, and is useful for determining
     /// appropriate contrast between colors.

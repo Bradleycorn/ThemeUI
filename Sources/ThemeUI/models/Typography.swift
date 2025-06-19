@@ -1,4 +1,3 @@
-#if os(iOS)
 import Foundation
 import SwiftUI
 
@@ -56,4 +55,3 @@ public class Typography: ObservableObject {
         self.labelSmall = labelSmall
     }
 }
-#endif

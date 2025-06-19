@@ -8,7 +8,7 @@ look at the areas in which you can customize your app theme.
 
 ### Colors
 ThemeUI provides a rich color pallette with semantic color names
-via the <doc:Colors> class. Colors fall into one of several categories, and categories
+via the <doc:ColorScheme> class. Colors fall into one of several categories, and categories
 may define one or more color variants. Apply your primary, secondary, and tertiary
 brand colors, as well as customing colors for common elements such as backgrounds,
 surfaces, and outlines.
@@ -42,7 +42,7 @@ To use your custom Colors, Typography, and/or Shapes in your app, pass them to t
 ```swift
 var body: some Scene {
     WindowGroup {
-        ThemedView(colors: Colors(...), typography: Typography(...), shapes: Shapes(...)) {
+        ThemedView(colors: ColorScheme(...), typography: Typography(...), shapes: Shapes(...)) {
             AppContent()
         }
     }

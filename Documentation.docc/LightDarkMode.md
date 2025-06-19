@@ -3,15 +3,15 @@ Handling Light and Dark mode with ThemeUI
 
 ## Overview
 If you define your colors in an Asset Catalog, it provides a mechanism for handling light and dark mode
-in your app. You can create a single ``Colors`` instance using the colors from your catalog and use it with
+in your app. You can create a single ``ColorScheme`` instance using the colors from your catalog and use it with
 a ``ThemedView``.
 
 But if you define your colors in code, as described in <doc:DefiningColors> and <doc:ColorConsiderations>, 
 you will need to handle color mode changes yourself. Fortunately SwfitUI and ThemeUI provide tools to make
 this a piece of cake.
 
-To support both light and dark mode in your app, you can create a set of ``Colors`` for light mode, and 
-another set for dark mode. Then, you can take advantage of SwiftUI's built-in support for light/dark mode 
+To support both light and dark mode in your app, you can create a ``ColorScheme`` for light mode, and 
+another instance for dark mode. Then, you can take advantage of SwiftUI's built-in support for light/dark mode 
 by defining your own Themed View that switches the color scheme based on the current mode:
 
 ```swift
@@ -28,7 +28,7 @@ struct MyAppTheme<Content: View>: View {
             self.content = content
     }
 
-    private var appColors: Colors {
+    private var appColors: ColorScheme {
       switch(colorMode) {
         case .dark:
           darkColors
@@ -58,7 +58,7 @@ struct MyApp: App {
 }
 ```
 SwiftUI will automatically re-render your MyAppTheme when the device's color mode changes,
-resulting in a new set of ``Colors`` passed to ``ThemedView``, and a new ``AppTheme`` instance
+resulting in a new ``ColorScheme`` passed to ``ThemedView``, and a new ``AppTheme`` instance
 provided to the Environment. Your child views will use the new colors and render in the appropriate
 light or dark mode.
 

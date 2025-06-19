@@ -1,4 +1,3 @@
-#if os(iOS)
 import Foundation
 import SwiftUI
 
@@ -27,8 +26,8 @@ import SwiftUI
 /// theme to your app using the SwiftUI `ColorScheme` environment variable.
 public class AppTheme: ObservableObject {
     
-    /// A ``Colors`` instance that exposes the set of colors used by this theme.
-    public let colorScheme: Colors
+    /// A ``ColorScheme`` instance that exposes the set of colors used by this theme.
+    public let colorScheme: ColorScheme
     
     /// A ``Typography`` instane that exposes the set of type faces used by this theme.
     public let typography: Typography
@@ -42,11 +41,10 @@ public class AppTheme: ObservableObject {
     ///   - colors: The set of ``Colors`` for this theme to use.
     ///   - typography: The set of ``Typography`` for this theme to use.
     ///   - shapes: The set of ``Shapes`` for this theme to use.
-    init(_ colors: Colors, _ typography: Typography, _ shapes: Shapes) {
+    init(_ colors: ColorScheme, _ typography: Typography, _ shapes: Shapes) {
         self.colorScheme = colors
         self.typography = typography
         self.shapes = shapes
     }
     
 }
-#endif

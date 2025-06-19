@@ -132,7 +132,7 @@ should only have to specify the "main" color for the button background, and the 
 to automatically figure out the text/content color to use on the background. The `ColorScheme` in ThemeUI provides 
 a utility method to handle this case. 
 
-Your view can use ``Colors/contentColorFor(_:)`` to get an appropriate "on" content color for a given color. 
+Your view can use ``ColorScheme/contentColorFor(_:)`` to get an appropriate "on" content color for a given color. 
 We can leverage this to write our Button view:
 ```swift
 struct MyAppButton: View {

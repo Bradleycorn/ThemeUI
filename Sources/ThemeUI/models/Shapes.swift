@@ -1,4 +1,3 @@
-#if os(iOS)
 import Foundation
 import SwiftUI
 /// A set of semantically named Shapes to be applied by an ``AppTheme``
@@ -53,4 +52,3 @@ public class Shapes: ObservableObject {
             self.large = AnyShape(large)
     }
 }
-#endif
