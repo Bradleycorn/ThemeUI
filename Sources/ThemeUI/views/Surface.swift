@@ -34,9 +34,9 @@ public struct Surface<Content: View>: View {
     ///
     /// - Parameters:
     ///   - color: A `Color` to apply to the surface's background.
-    ///   Defaults to the ``ColorScheme/surface`` color from the current ``AppTheme``.
+    ///   Defaults to the ``ThemeColors/surface`` color from the current ``AppTheme``.
     ///   - contentColor: A `Color` to apply to foreground content on the surface.
-    ///   Defaults to the ``ColorScheme/onSurface`` color from the current ``AppTheme``.
+    ///   Defaults to the ``ThemeColors/onSurface`` color from the current ``AppTheme``.
     ///   - alignment: An `Alignment` to apply to content on the surface.
     ///   Defaults to `.center`.
     ///   - consumeEdges: An `Edge.Set` that defines a set of edges that should be consumed when drawing the surface background.

@@ -4,7 +4,7 @@ import SwiftUI
 /// A SwiftUI `ButtonStyle` that renders a button with a filled background.
 ///
 /// This style uses colors, typography, and shapes from  your ``AppTheme`` to render a button
-/// with a filled background. By default the button colors are based on your theme's ``ColorScheme/primary`` color,
+/// with a filled background. By default the button colors are based on your theme's ``ThemeColors/primary`` color,
 /// but you can pass a different set of ``ButtonColors`` to use if you prefer.
 public struct FilledButtonStyle: ButtonStyle {
 
@@ -24,12 +24,12 @@ public struct FilledButtonStyle: ButtonStyle {
 
     /// Create a `FilledButtonStyle` instance.
     ///
-    /// You can call the initializer without  passing any arguments, to render a button using the ``ColorScheme/deaultButtonColors``
+    /// You can call the initializer without  passing any arguments, to render a button using the ``ThemeColors/deaultButtonColors``
     /// from your ``AppTheme``. Or pass in your own set of ``ButtonColors`` and/or `Shape` to cusomtize the button display.
     ///
     /// - Parameters:
     ///   - colors: A custom set of ``ButtonColors`` to use when rendering the button.
-    ///             Defaults to `nil`, which will use the ``ColorScheme/deaultButtonColors`` from your ``AppTheme``.
+    ///             Defaults to `nil`, which will use the ``ThemeColors/deaultButtonColors`` from your ``AppTheme``.
     ///   - shape: A custom `Shape` to use when rendering the button.
     ///            Defaults to the  ``ButtonDefaults/shape`` specified in ``ButtonDefaults``.
     public init(_ colors: ButtonColors? = nil, shape: some Shape = ButtonDefaults.shape) {
@@ -55,7 +55,7 @@ public struct FilledButtonStyle: ButtonStyle {
 ///
 /// This style uses colors, typography, and shapes from  your ``AppTheme`` to render a button
 /// with colored text content and outline, and a transparent background.
-/// By default the button colors are based on your theme's ``ColorScheme/primary`` color,
+/// By default the button colors are based on your theme's ``ThemeColors/primary`` color,
 /// but you can pass a different set of ``ButtonColors`` to use if you prefer.
 public struct OutlinedButtonStyle: ButtonStyle {
 
@@ -76,12 +76,12 @@ public struct OutlinedButtonStyle: ButtonStyle {
     
     /// Create an `OutlinedButtonStyle` instance.
     ///
-    /// You can call the initializer without  passing any arguments, to render a button using the ``ColorScheme/outlinedButtonColors``
+    /// You can call the initializer without  passing any arguments, to render a button using the ``ThemeColors/outlinedButtonColors``
     /// from your ``AppTheme``. Or pass in your own set of ``ButtonColors`` and/or `Shape` to cusomtize the button display.
     ///
     /// - Parameters:
     ///   - colors: A custom set of ``ButtonColors`` to use when rendering the button.
-    ///             Defaults to `nil`, which will use the ``ColorScheme/outlinedButtonColors`` from your ``AppTheme``.
+    ///             Defaults to `nil`, which will use the ``ThemeColors/outlinedButtonColors`` from your ``AppTheme``.
     ///   - shape: A custom `Shape` to use when rendering the button.
     ///            Defaults to the  ``ButtonDefaults/shape`` specified in ``ButtonDefaults``.
     public init(_ colors: ButtonColors? = nil, shape: some Shape = ButtonDefaults.shape) {
@@ -117,7 +117,7 @@ public struct OutlinedButtonStyle: ButtonStyle {
 /// other visual elements.
 ///
 /// This style uses colors, typography, and shapes from  your ``AppTheme`` to render a button.
-/// By default the button foreground colors are based on your theme's ``ColorScheme/primary`` color,
+/// By default the button foreground colors are based on your theme's ``ThemeColors/primary`` color,
 /// but you can pass a different set of ``ButtonColors`` to use if you prefer.
 public struct TextButtonStyle: ButtonStyle {
 
@@ -134,18 +134,18 @@ public struct TextButtonStyle: ButtonStyle {
     
     /// Create a `TextButtonStyle` instance.
     ///
-    /// You can call the initializer without  passing any arguments, to render a button using the ``ColorScheme/textButtonColors``
+    /// You can call the initializer without  passing any arguments, to render a button using the ``ThemeColors/textButtonColors``
     /// from your ``AppTheme``. Or pass in your own set of ``ButtonColors``.
     ///
     /// - Parameters:
     ///   - colors: A custom set of ``ButtonColors`` to use when rendering the button.
-    ///             Defaults to `nil`, which will use the ``ColorScheme/textButtonColors`` from your ``AppTheme``.
+    ///             Defaults to `nil`, which will use the ``ThemeColors/textButtonColors`` from your ``AppTheme``.
     public init(_ colors: ButtonColors? = nil) {
         self.customColors = colors
     }
         
     /// A computed property that determines the ``ButtonColors`` to use for rendering.
-    /// It will use the `customColors` if they are defined, or ``ColorScheme/textButtonColors``
+    /// It will use the `customColors` if they are defined, or ``ThemeColors/textButtonColors``
     /// if no `customColors` are defined.
     private var colors: ButtonColors {
         customColors ?? ButtonDefaults.textColors(from: theme.colorScheme)
@@ -255,9 +255,9 @@ public struct ButtonColors {
         }
 }
 
-extension ColorScheme {    
+extension ThemeColors {    
     
-    /// An  instance of ``ButtonColors``based on the ``ColorScheme/primary`` color, suitable
+    /// An  instance of ``ButtonColors``based on the ``ThemeColors/primary`` color, suitable
     /// for use with buttons that have a filled background color.
     public var deaultButtonColors: ButtonColors {
         ButtonColors(
@@ -267,7 +267,7 @@ extension ColorScheme {
             disabledForegroundColor: onPrimaryContainer.opacity(0.35))
     }
     
-    /// An  instance of ``ButtonColors``based on the ``ColorScheme/primary`` color, suitable
+    /// An  instance of ``ButtonColors``based on the ``ThemeColors/primary`` color, suitable
     /// for use with buttons that have a transparent background.
     public var outlinedButtonColors: ButtonColors {
         ButtonColors(
@@ -277,7 +277,7 @@ extension ColorScheme {
             disabledForegroundColor: primary.opacity(0.5))
     }
     
-    /// An  instance of ``ButtonColors``based on the ``ColorScheme/primary`` color, suitable
+    /// An  instance of ``ButtonColors``based on the ``ThemeColors/primary`` color, suitable
     /// for use with buttons that have a transparent background and no other visual elements such
     /// as borders or outlines.
     public var textButtonColors: ButtonColors{

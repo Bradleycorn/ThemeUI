@@ -45,11 +45,11 @@ public struct ThemedView<Content: View>: View {
     /// Creates a ThemedView, and sets the ``AppTheme``.
     ///
     /// - Parameters:
-    ///   - colors: A set of ``ColorScheme`` to use in the theme.
+    ///   - colors: A set of ``ThemeColors`` to use in the theme.
     ///   - typography: A set of ``Typography`` to use in the theme.
     ///   - shapes: A set of ``Shapes`` to use in the theme.
     ///   - content : A `@ViewBuilder` that contains the content to be rendered with this theme applied.
-    public init(colors: ColorScheme = lightColorScheme(), typography: Typography = Typography(), shapes: Shapes = Shapes(), @ViewBuilder content: @escaping ()->Content) {
+    public init(colors: ThemeColors = lightColorScheme(), typography: Typography = Typography(), shapes: Shapes = Shapes(), @ViewBuilder content: @escaping ()->Content) {
         theme = AppTheme(colors, typography, shapes)
         self.content = content
     }
@@ -71,7 +71,7 @@ struct DefaultTheme<Content: View>: View {
 
     @Environment(\.colorScheme) var colorMode
     
-    private var colors: ColorScheme {
+    private var colors: ThemeColors {
         switch colorMode {
             case .dark:
                 darkColorScheme()

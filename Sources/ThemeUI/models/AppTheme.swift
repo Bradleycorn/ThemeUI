@@ -23,11 +23,11 @@ import SwiftUI
 /// of colors, regardless of the device's light/dark mode setting. If you want to handle light
 /// and dark mode in your app, it's easy to create two `AppTheme` instances (one for each mode,
 /// and each with a set of colors that apply to that mode), and you can apply the appropriate
-/// theme to your app using the SwiftUI `ColorScheme` environment variable.
+/// theme to your app using the SwiftUI `ThemeColors` environment variable.
 public class AppTheme: ObservableObject {
     
-    /// A ``ColorScheme`` instance that exposes the set of colors used by this theme.
-    public let colorScheme: ColorScheme
+    /// A ``ThemeColors`` instance that exposes the set of colors used by this theme.
+    public let colorScheme: ThemeColors
     
     /// A ``Typography`` instane that exposes the set of type faces used by this theme.
     public let typography: Typography
@@ -41,7 +41,7 @@ public class AppTheme: ObservableObject {
     ///   - colors: The set of ``Colors`` for this theme to use.
     ///   - typography: The set of ``Typography`` for this theme to use.
     ///   - shapes: The set of ``Shapes`` for this theme to use.
-    init(_ colors: ColorScheme, _ typography: Typography, _ shapes: Shapes) {
+    init(_ colors: ThemeColors, _ typography: Typography, _ shapes: Shapes) {
         self.colorScheme = colors
         self.typography = typography
         self.shapes = shapes

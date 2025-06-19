@@ -39,7 +39,7 @@ let lightBlue = Color(0xFF248FF1)
 
 With your specific color defined you can now use it to create your semantic color palatte for use with ThemeUI:
 ```swift
-let myLightcolors = ligyhtColorScheme(
+let myLightcolors = lightColorScheme(
   primary: lightBlue,
   primaryContainer: lightBlue,
   onPrimary: .white
@@ -129,10 +129,10 @@ With SwiftUI, we place an emphasis on writing re-useable views. A common use cas
 can be rendered in a variety of colors.For example, you might write a commong Button component (MyAppButton) 
 and you want to render buttons with any color background (primary, secondary, tertiary, etc). Ideally a caller 
 should only have to specify the "main" color for the button background, and the Button component should be able 
-to automatically figure out the text/content color to use on the background. The `ColorScheme` in ThemeUI provides 
+to automatically figure out the text/content color to use on the background. The `ThemeColors` in ThemeUI provides 
 a utility method to handle this case. 
 
-Your view can use ``ColorScheme/contentColorFor(_:)`` to get an appropriate "on" content color for a given color. 
+Your view can use ``ThemeColors/contentColorFor(_:)`` to get an appropriate "on" content color for a given color. 
 We can leverage this to write our Button view:
 ```swift
 struct MyAppButton: View {

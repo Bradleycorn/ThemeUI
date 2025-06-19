@@ -24,9 +24,9 @@ public class ButtonDefaults {
     /// this property provides a set of colors from your ``AppTheme/colorScheme`` to use by default.
     ///
     /// - Parameters:
-    ///   - colorScheme: The current ``ColorScheme`` applyed by your ``AppTheme``.
+    ///   - colorScheme: The current ``ThemeColors`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to buttons.
-    public static func colors(from colorScheme: ColorScheme) -> ButtonColors {
+    public static func colors(from colorScheme: ThemeColors) -> ButtonColors {
         return colorScheme.deaultButtonColors
     }
     
@@ -37,9 +37,9 @@ public class ButtonDefaults {
     /// for the button's text content and border.
     ///
     /// - Parameters:
-    ///   - colorScheme: The current ``ColorScheme`` applyed by your ``AppTheme``.
+    ///   - colorScheme: The current ``ThemeColors`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to an Outlined button's text and border.
-    public static func outlinedColors(from colorScheme: ColorScheme) -> ButtonColors {
+    public static func outlinedColors(from colorScheme: ThemeColors) -> ButtonColors {
         return colorScheme.outlinedButtonColors
     }
 
@@ -51,9 +51,9 @@ public class ButtonDefaults {
     /// for the button's text content.
     ///
     /// - Parameters:
-    ///   - colorScheme: The current ``ColorScheme`` applyed by your ``AppTheme``.
+    ///   - colorScheme: The current ``ThemeColors`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to an Text button's text.
-    public static func textColors(from colorScheme: ColorScheme) -> ButtonColors {
+    public static func textColors(from colorScheme: ThemeColors) -> ButtonColors {
         return colorScheme.textButtonColors
     }
 

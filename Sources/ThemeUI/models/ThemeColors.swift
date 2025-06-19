@@ -20,7 +20,7 @@ import SwiftUI
 /// customize only the colors that are specific and relevant to your
 /// app. See the <doc:Color#Creating-a-Color-Palette> documentation
 /// for more information.
-public struct ColorScheme {
+public struct ThemeColors {
     
     /// Your primary brand color.
     ///
@@ -307,8 +307,8 @@ public func lightColorScheme(
     surfaceContainerLow: Color = default_light_surfaceContainerLow,
     surfaceContainerHigh: Color = default_light_surfaceContainerHigh,
     surfaceContainerHighest: Color = default_light_surfaceContainerHigh
-) -> ColorScheme {
-    return ColorScheme(
+) -> ThemeColors {
+    return ThemeColors(
         primary: primary,
         onPrimary: onPrimary,
         primaryContainer: primaryContainer,
@@ -387,8 +387,8 @@ public func darkColorScheme(
     surfaceContainerHigh: Color = default_light_surfaceContainerHigh,
     surfaceContainerHighest: Color = default_light_surfaceContainerHigh
 
-) -> ColorScheme {
-    return ColorScheme(
+) -> ThemeColors {
+    return ThemeColors(
         primary: primary,
         onPrimary: onPrimary,
         primaryContainer: primaryContainer,
@@ -425,8 +425,8 @@ public func darkColorScheme(
 }
 
 /// A SwiftUI View that previews the color scheme of the current AppTheme.
-/// You may wish to use this view as a Preview in your app to visuallize the colors in your ``ColorScheme``.
-public struct ColorSchemePreview: View {
+/// You may wish to use this view as a Preview in your app to visuallize the colors in your ``ThemeColors``.
+public struct ThemeColorsPreview: View {
     @EnvironmentObject var theme: AppTheme
     
     public var body: some View {
@@ -536,7 +536,7 @@ fileprivate struct ErrorAndInverseColors: View {
     let colorScheme = lightColorScheme()
     
     ThemedView(colors: colorScheme) {
-        ColorSchemePreview()
+        ThemeColorsPreview()
     }
     .background(.gray.opacity(0.1))
 }
