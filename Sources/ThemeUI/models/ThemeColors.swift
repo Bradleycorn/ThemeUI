@@ -428,6 +428,10 @@ public func darkColorScheme(
 /// You may wish to use this view as a Preview in your app to visuallize the colors in your ``ThemeColors``.
 public struct ThemeColorsPreview: View {
     @EnvironmentObject var theme: AppTheme
+
+    // We have to explicitly define an initializer so we can specify that it is "public".
+    // Otherwise, it will be internal by default, and consuming apps can't call it.
+    public init() {}
     
     public var body: some View {
         VStack(spacing: 12) {
