@@ -15,7 +15,7 @@ extension Color {
     /// For example, 0xff00ff00 represents the color Green, with no transparency.
     ///
     /// - Parameter hexNumber: The 32-bit ARGB color int to create a Color from. For example 0xff009900.
-    public init(_ hexNumber: UInt64) {
+    public init(_ hexNumber: Int64) {
         let r, g, b, a: CGFloat
 
         a = CGFloat((hexNumber & 0xff000000) >> 24) / 255
