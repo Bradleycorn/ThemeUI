@@ -22,6 +22,9 @@ public struct FilledButtonStyle: ButtonStyle {
     /// A `Shape` to use for rendering the button.
     private let shape: AnyShape
 
+    /// A set of `EdgeInsets` to provide padding between button text and it's fill/border space.
+    private let padding: EdgeInsets
+
     /// Create a `FilledButtonStyle` instance.
     ///
     /// You can call the initializer without  passing any arguments, to render a button using the ``ThemeColors/deaultButtonColors``
@@ -32,9 +35,10 @@ public struct FilledButtonStyle: ButtonStyle {
     ///             Defaults to `nil`, which will use the ``ThemeColors/deaultButtonColors`` from your ``AppTheme``.
     ///   - shape: A custom `Shape` to use when rendering the button.
     ///            Defaults to the  ``ButtonDefaults/shape`` specified in ``ButtonDefaults``.
-    public init(_ colors: ButtonColors? = nil, shape: some Shape = ButtonDefaults.shape) {
+    public init(_ colors: ButtonColors? = nil, shape: some Shape = ButtonDefaults.shape, padding: EdgeInsets = ButtonDefaults.padding) {
         self.customColors = colors
         self.shape = AnyShape(shape)
+        self.padding = padding
     }
     
     /// A computed property that determines the ``ButtonColors`` to use for rendering.
@@ -47,7 +51,7 @@ public struct FilledButtonStyle: ButtonStyle {
     /// Render the button and apply appropriate styling.
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .modifier(ThemedButtonStyle(padding: ButtonDefaults.padding, colors: colors, shape: shape))
+            .modifier(ThemedButtonStyle(padding: padding, colors: colors, shape: shape))
     }
 }
 
@@ -74,6 +78,8 @@ public struct OutlinedButtonStyle: ButtonStyle {
     /// A `Shape` to use for rendering the button.
     private let shape: AnyShape
     
+    private let padding: EdgeInsets
+    
     /// Create an `OutlinedButtonStyle` instance.
     ///
     /// You can call the initializer without  passing any arguments, to render a button using the ``ThemeColors/outlinedButtonColors``
@@ -84,9 +90,10 @@ public struct OutlinedButtonStyle: ButtonStyle {
     ///             Defaults to `nil`, which will use the ``ThemeColors/outlinedButtonColors`` from your ``AppTheme``.
     ///   - shape: A custom `Shape` to use when rendering the button.
     ///            Defaults to the  ``ButtonDefaults/shape`` specified in ``ButtonDefaults``.
-    public init(_ colors: ButtonColors? = nil, shape: some Shape = ButtonDefaults.shape) {
+    public init(_ colors: ButtonColors? = nil, shape: some Shape = ButtonDefaults.shape, padding: EdgeInsets = ButtonDefaults.padding) {
         self.customColors = colors
         self.shape = AnyShape(shape)
+        self.padding = padding
     }
         
     /// A computed property that determines the ``ButtonColors`` to use for rendering.
@@ -98,18 +105,15 @@ public struct OutlinedButtonStyle: ButtonStyle {
     
     /// A computed property that determines the color to use for the outline, based on whether
     /// the button is enabled or disabled.
-    private var outlineColor: Color {
-        (isEnabled) ? colors.foregroundColor : colors.disabledForegroundColor
+    private var outlineColor: AnyShapeStyle {
+        (isEnabled) ? colors.borderColor : colors.disabledBorderColor
     }
     
     /// Render the button and apply appropriate styling.
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .modifier(ThemedButtonStyle(padding: ButtonDefaults.padding, colors: colors, shape: shape))
-            .overlay(
-                shape
-                    .stroke(outlineColor, lineWidth: ButtonDefaults.outlinedButtonBorderWidth)
-            )
+            .modifier(ThemedButtonStyle(padding: padding, colors: colors, shape: shape))
+            .overlay(shape.stroke(outlineColor, lineWidth: ButtonDefaults.outlinedButtonBorderWidth))
     }
 }
 
@@ -178,12 +182,12 @@ fileprivate struct ThemedButtonStyle: ViewModifier {
     var shape: AnyShape
 
     /// A calculated property that sets the button's background color based on whether it's enabled or disabled.
-    private var backgroundColor: Color {
+    private var backgroundColor: AnyShapeStyle {
         (isEnabled) ? colors.backgroundColor : colors.disabledBackgroundColor
     }
     
     /// A calculated property that sets the button's foreground color based on whether it's enabled or disabled.
-    private var foregroundColor: Color {
+    private var foregroundColor: AnyShapeStyle {
         (isEnabled) ? colors.foregroundColor : colors.disabledForegroundColor
     }
     
@@ -205,22 +209,45 @@ fileprivate struct ThemedButtonStyle: ViewModifier {
 /// of the various colors that may be used to render a button.
 public struct ButtonColors {
     
-    /// A `Color` to use for the background fill of a button in its "enabled" state. This `Color`
+    /// An `AnyShapeStyle` to use for the background fill of a button in its "enabled" state. This style
     /// should have sufficient contrast with the `foregroundColor.`
-    let backgroundColor: Color
+    let backgroundColor: AnyShapeStyle
     
-    /// A `Color` to use for the foreground button content in it's "enabled" state. This `Color`
+    /// An `AnyShapeStyle` to use for the foreground button content in it's "enabled" state. This style
     /// should have sufficient contrast with the `backgroundColor.`
-    let foregroundColor: Color
+    let foregroundColor: AnyShapeStyle
     
-    /// A `Color` to use for the background fill of a button in its "disabled" state. This `Color`
+    /// An `AnyShapeStyle` to use for the button's border in it's "enabled" state.
+    let borderColor: AnyShapeStyle
+    
+    /// An `AnyShapeStyle` to use for the background fill of a button in its "disabled" state. This style
     /// should have sufficient contrast with the `disabledForegroundColor.`
-    let disabledBackgroundColor: Color
-
-    /// A `Color` to use for the foreground button content in it's "disabled" state. This `Color`
+    let disabledBackgroundColor: AnyShapeStyle
+    
+    /// An `AnyShapeStyle` to use for the foreground button content in it's "disabled" state. This style
     /// should have sufficient contrast with the `disabledBackgroundColor.`
-    let disabledForegroundColor: Color
-
+    let disabledForegroundColor: AnyShapeStyle
+    
+    /// An `AnyShapeStyle` to use for the button's border in it's "disabled" state.
+    let disabledBorderColor: AnyShapeStyle
+    
+    public init(
+        backgroundColor: some ShapeStyle,
+        foregroundColor: some ShapeStyle,
+        borderColor: some ShapeStyle = Color.clear,
+        disabledBackgroundColor: some ShapeStyle,
+        disabledForegroundColor: some ShapeStyle,
+        disabledBorderColor: some ShapeStyle = Color.clear
+    ) {
+        self.backgroundColor = AnyShapeStyle(backgroundColor)
+        self.foregroundColor = AnyShapeStyle(foregroundColor)
+        self.borderColor = AnyShapeStyle(borderColor)
+        self.disabledBackgroundColor = AnyShapeStyle(disabledBackgroundColor)
+        self.disabledForegroundColor = AnyShapeStyle(disabledForegroundColor)
+        self.disabledBorderColor = AnyShapeStyle(disabledBorderColor)
+    }
+    
+    
     /// Create a new instance of ``ButtonColors`` using values from this instance
     /// as defaults.
     ///
@@ -231,61 +258,39 @@ public struct ButtonColors {
     /// use values from this instance for any others that you do not specify.
     ///
     /// - Parameters:
-    ///   - backgroundColor: An optional `Color` to use as the background color in the "enabled" state.
+    ///   - backgroundColor: An optional `ShapeStyle` to use as the background in the "enabled" state.
     ///   If no value is passed, the `backgroundColor` from this instance will be used.
-    ///   - foregroundColor: An optional `Color` to use as the foreground color in the "enabled" state.
+    ///   - foregroundColor: An optional `ShapeStyle` to use as the foreground in the "enabled" state.
     ///   If no value is passed, the `foregroundColor` from this instance will be used.
-    ///   - disabledBackgroundColor: An optional `Color` to use as the background color in the "disabled" state.
+    ///   - borderColor: An optional `ShapeStyle` to use as the border in the "enabled" state.
+    ///   If no value is passed, the `borderColor` from this instance will be used.
+    ///   - disabledBackgroundColor: An optional `ShapeStyle` to use as the background in the "disabled" state.
     ///   If no value is passed, the `disabledBackgroundColor` from this instance will be used.
-    ///   - disabledForegroundColor: An optional `Color` to use as the foreground color in the "disabled" state.
+    ///   - disabledForegroundColor: An optional `ShapeStyle` to use as the foreground in the "disabled" state.
     ///   If no value is passed, the `disabledForegroundColor` from this instance will be used.
-    /// - Returns: A new `ButtonColors` instance using the colors that were passed in, 
-    ///   and colors from this intance for any colors that were not passed in.
+    ///   - disabledBorderColor: An optional `ShapeStyle` to use as the border in the "disabled" state.
+    ///   If no value is passed, the `disabledBorderColor` from this instance will be used.
+    /// - Returns: A new `ButtonColors` instance using the styles that were passed in,
+    ///   and styles from this intance for any styles that were not passed in.
     public func copy(
-        backgroundColor: Color? = nil,
-        foregroundColor: Color? = nil,
-        disabledBackgroundColor: Color? = nil,
-        disabledForegroundColor: Color? = nil) -> ButtonColors {
-            
-            ButtonColors(
-                backgroundColor: backgroundColor ?? self.backgroundColor,
-                foregroundColor: foregroundColor ?? self.foregroundColor,
-                disabledBackgroundColor: disabledBackgroundColor ?? self.disabledBackgroundColor,
-                disabledForegroundColor: disabledForegroundColor ?? self.disabledForegroundColor)
+        backgroundColor: (any ShapeStyle)? = nil,
+        foregroundColor: (any ShapeStyle)? = nil,
+        borderColor: (any ShapeStyle)? = nil,
+        disabledBackgroundColor: (any ShapeStyle)? = nil,
+        disabledForegroundColor: (any ShapeStyle)? = nil,
+        disabledBorderColor: (any ShapeStyle)? = nil
+    ) -> ButtonColors {
+        func resolve(_ new: (any ShapeStyle)?, fallback: AnyShapeStyle) -> AnyShapeStyle {
+            if let new { AnyShapeStyle(new) } else { fallback }
         }
-}
 
-extension ThemeColors {    
-    
-    /// An  instance of ``ButtonColors``based on the ``ThemeColors/primary`` color, suitable
-    /// for use with buttons that have a filled background color.
-    public var deaultButtonColors: ButtonColors {
-        ButtonColors(
-            backgroundColor: primary,
-            foregroundColor: onPrimary,
-            disabledBackgroundColor: primaryContainer,
-            disabledForegroundColor: onPrimaryContainer.opacity(0.35))
-    }
-    
-    /// An  instance of ``ButtonColors``based on the ``ThemeColors/primary`` color, suitable
-    /// for use with buttons that have a transparent background.
-    public var outlinedButtonColors: ButtonColors {
-        ButtonColors(
-            backgroundColor: .clear,
-            foregroundColor: primary,
-            disabledBackgroundColor: .clear,
-            disabledForegroundColor: primary.opacity(0.5))
-    }
-    
-    /// An  instance of ``ButtonColors``based on the ``ThemeColors/primary`` color, suitable
-    /// for use with buttons that have a transparent background and no other visual elements such
-    /// as borders or outlines.
-    public var textButtonColors: ButtonColors{
-        ButtonColors(
-            backgroundColor: .clear,
-            foregroundColor: primary,
-            disabledBackgroundColor: .clear,
-            disabledForegroundColor: primary.opacity(0.5)
+        return ButtonColors(
+            backgroundColor: resolve(backgroundColor, fallback: self.backgroundColor),
+            foregroundColor: resolve(foregroundColor, fallback: self.foregroundColor),
+            borderColor: resolve(borderColor, fallback: self.borderColor),
+            disabledBackgroundColor: resolve(disabledBackgroundColor, fallback: self.disabledBackgroundColor),
+            disabledForegroundColor: resolve(disabledForegroundColor, fallback: self.disabledForegroundColor),
+            disabledBorderColor: resolve(disabledBorderColor, fallback: self.disabledBorderColor)
         )
     }
 }
@@ -293,6 +298,7 @@ extension ThemeColors {
 #Preview {
     DefaultTheme {
         VStack {
+            Text("Test")
             Button("Filled Enabled", action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/)
                 .buttonStyle(FilledButtonStyle())
             
