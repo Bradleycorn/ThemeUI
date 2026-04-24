@@ -17,7 +17,16 @@ public class ButtonDefaults {
     public static var padding: EdgeInsets {
         EdgeInsets(horizontal: 16, vertical: 8)
     }
+
+    /// A default border width to apply to buttons that use an ``OutlinedButtonStyle``.
+    public static let outlinedButtonBorderWidth: CGFloat = 1
     
+    /// A default shape to apply to ``FilledButtonStyle`` and ``OutlinedButtonStyle`` buttons.
+    public static let shape: some Shape = .capsule
+    
+    // A default opacity value to apply to disabled buttons.
+    public static let disabledOpacity: CGFloat = 0.5
+
     /// A set of ``ButtonColors`` to apply to buttons with a filled background color.
     ///
     /// When presenting buttons using the ``FilledButtonStyle`` or ``TextButtonStyle``,
@@ -27,7 +36,12 @@ public class ButtonDefaults {
     ///   - colorScheme: The current ``ThemeColors`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to buttons.
     public static func colors(from colorScheme: ThemeColors) -> ButtonColors {
-        return colorScheme.deaultButtonColors
+        return ButtonColors(
+            backgroundColor: colorScheme.primary,
+            foregroundColor: colorScheme.onPrimary,
+            disabledBackgroundColor: colorScheme.primaryContainer,
+            disabledForegroundColor: colorScheme.onPrimaryContainer.opacity(disabledOpacity)
+        )
     }
     
     /// A set of ``ButtonColors`` to apply to buttons with a transparent background and an outline/border.
@@ -40,7 +54,14 @@ public class ButtonDefaults {
     ///   - colorScheme: The current ``ThemeColors`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to an Outlined button's text and border.
     public static func outlinedColors(from colorScheme: ThemeColors) -> ButtonColors {
-        return colorScheme.outlinedButtonColors
+        return ButtonColors(
+            backgroundColor: .clear,
+            foregroundColor: .primary,
+            borderColor: colorScheme.primary,
+            disabledBackgroundColor: .clear,
+            disabledForegroundColor: .primary.opacity(disabledOpacity),
+            disabledBorderColor: colorScheme.primary.opacity(disabledOpacity)
+        )
     }
 
     
@@ -54,12 +75,11 @@ public class ButtonDefaults {
     ///   - colorScheme: The current ``ThemeColors`` applyed by your ``AppTheme``.
     /// - Returns: A set of ``ButtonColors`` to be applied to an Text button's text.
     public static func textColors(from colorScheme: ThemeColors) -> ButtonColors {
-        return colorScheme.textButtonColors
+        return ButtonColors(
+            backgroundColor: .clear,
+            foregroundColor: colorScheme.primary,
+            disabledBackgroundColor: .clear,
+            disabledForegroundColor: colorScheme.primary.opacity(disabledOpacity)
+        )
     }
-
-    /// A default border width to apply to buttons that use an ``OutlinedButtonStyle``.
-    public static let outlinedButtonBorderWidth: CGFloat = 1
-    
-    /// A sdefault hape to apply to ``FilledButtonStyle`` and ``OutlinedButtonStyle`` buttons.
-    public static let shape: some Shape = .capsule
 }
