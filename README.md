@@ -23,7 +23,7 @@ Using ThemeUI in your app is actually really simple.
 
 ## Basic App Theme
 
-Start by creating an instance of the [`Colors`](Docs/Colors.md) class, and optionally instances of the [`Typography`](Docs/Typography.md), and [`Shapes`](Docs/Shapes.md) classes as well. 
+Start by creating an instance of the [`ThemeColors`](Sources/ThemeUI/Documentation.docc/Color.md) class, and optionally instances of the [`Typography`](Sources/ThemeUI/Documentation.docc/Type.md), and [`Shapes`](Sources/ThemeUI/Documentation.docc/Shape.md) classes as well. 
 These define the semantic colors, type, and shapes that you will use in your app. 
 
 Then in your app, render an instance of the `ThemedView` view, passing it your colors, types, and shapes. 
@@ -47,7 +47,7 @@ struct MyApp: App {
 ```
 
 `ThemedView` does two things:
-1. It sets an Environment Object with an instance of `AppTheme`, which exposes the [`Colors`](Docs/Colors.md), [`Typography`](Docs/Typography.md), and [`Shapes`](Docs/Shapes.md) objects that you passed to it.
+1. It sets an Environment Object with an instance of `AppTheme`, which exposes the [`ThemeColors`](Sources/ThemeUI/models/ThemeColors.swift), [`Typography`](Sources/ThemeUI/models/Typography.swift), and [`Shapes`](Sources/ThemeUI/models/Shapes.swift)) objects that you passed to it.
 2. It renders the `Content` that you pass to it via it's `content` closure.
 
 In your app views, You can access the `AppTheme` Environment Object, and use it to access and use your semantic colors, types, and shapes:
@@ -60,7 +60,7 @@ struct MyAppContent: View {
         Text("Themed Text!")
             .padding(8)
             .background(theme.colorScheme.secondary)
-            .foregroundColor(theme.colorScheme.onSecondary)
+            .foregroundColor(theme.colorScheme.contentColorFor(theme.colorScheme.secondary)
             .font(theme.typography.headlineMedium)
             .clipShape(theme.shapes.medium)
     }
