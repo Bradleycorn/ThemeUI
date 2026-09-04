@@ -144,7 +144,6 @@ struct MyAppButton: View {
 
   init(color: Color, text: String, onClick: @escaping () -> Void) {
     self.backgroundColor = color
-    self.foregroundColor = foregroundColor
     self.text = text
     self.onClick = onClick
   }
