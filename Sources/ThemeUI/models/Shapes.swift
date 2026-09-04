@@ -24,15 +24,20 @@ import SwiftUI
 ///
 public class Shapes: ObservableObject {
     
-    /// A shape to be applied to small views like chips or icons.
+    /// A shape to be applied to extra small views like text fields and snackbars.
+    @Published public private(set) var extraSmall: AnyShape
+    
+    /// A shape to be applied to small views like icons and chips.
     @Published public private(set) var small: AnyShape
     
     /// A shape to be applied to medium views like buttons or cards.
     @Published public private(set) var medium: AnyShape
     
-    /// A shaped to be applied to large views like bottom sheets or dialogs.
+    /// A shapee to be applied to large views like bottom sheets or dialogs.
     @Published public private(set) var large: AnyShape
     
+    /// A shape to be applied to very large views. Use these sparingly.
+    @Published public private(set) var extraLarge: AnyShape
     
     /// Create a new `Shapes` instance.
     ///
@@ -43,12 +48,15 @@ public class Shapes: ObservableObject {
     ///   - medium: A `Shape` to use for medium size views. Defaults to a Rounded Rectangle with a fair amount of rounding.
     ///   - large: A `Shape` to use for large size views. Defaults to a Rounded Rectangle with more rounding.
     public init(
+        extraSmall: some Shape = RoundedRectangle(cornerRadius: 4),
         small: some Shape = RoundedRectangle(cornerRadius: 8),
-        medium: some Shape = RoundedRectangle(cornerRadius: 10),
-        large: some Shape = RoundedRectangle(cornerRadius: 12)) {
-
+        medium: some Shape = RoundedRectangle(cornerRadius: 12),
+        large: some Shape = RoundedRectangle(cornerRadius: 16),
+        extraLarge: some Shape = RoundedRectangle(cornerRadius: 28)) {
+            self.extraSmall = AnyShape(extraSmall)
             self.small = AnyShape(small)
             self.medium = AnyShape(medium)
             self.large = AnyShape(large)
+            self.extraLarge = AnyShape(extraLarge)
     }
 }
